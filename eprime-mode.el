@@ -86,6 +86,7 @@
       (let ((new-ov (make-overlay start (point))))
 	(overlay-put new-ov 'face 'eprime-banned-words-face)))))
 
+;;;###autoload
 (defun eprime-check-buffer ()
   "Checks the current buffer for banned words and applies a face
    to them."
@@ -106,6 +107,7 @@
 	(forward-word -1))))
   (modify-syntax-entry ?' "."))
 
+;;;###autoload
 (defun eprime-check-word ()
   "Checks the word that's currently entering."
   (interactive)
@@ -130,6 +132,7 @@
 	(eprime-check-word)
 	(forward-word 1)))))
 
+;;;###autoload
 (defun eprime-remove-corrections ()
   "Removes the overlayed corrections on words."
   (interactive)
@@ -149,6 +152,7 @@
   ;;The below resets ' to its default.
   (modify-syntax-entry ?' "."))
 
+;;;###autoload
 (define-minor-mode eprime-mode
   "Minor mode for checking text conforms to E'. Change eprime-banned-words-face
   to change what banned words look like, and use (setq eprime-ignore-case nil) if you
