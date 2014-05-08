@@ -4,21 +4,19 @@ eprime-mode
 A mode that informs users of words not conforming to E' in Emacs Lisp.
 
 
-* Installation
+####Installation
 
 If you have packages properly set up, simply do `M-x package-refresh-contents` followed by `M-x package-install eprime-mode`, and everything should work out of the box.
 
 You can find eprime-mode on both Marmalade and MELPA.
 
-* E-prime? What?...
+#### E-prime? What?...
 
 D. David Bourland, Jr., proposed an improvement to English called  E-prime (or E'), which doesn't allow forms of "to be", aiming to remedy some of its problems (such avoiding objectivity). Since then, many scholars have picked up the idea and debated hotly over its usefulness (or lack thereof).
 
 Some argue it can clarify thoughts and strengthen writing, but I won't decide for you! Regardless of whether you think it could wind up resulting in something beneficial if everyone flipped to E' from English, I find it a fun game, if nothing else.
 
 To find out more, please see [the Wikipedia page](https://en.wikipedia.org/wiki/E-Prime).
-
-* Setting up packages
 
 #### Setting up packages in Emacs 24
 
