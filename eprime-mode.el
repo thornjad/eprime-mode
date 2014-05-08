@@ -54,16 +54,15 @@
 
 (require 'cl)
 
-(defvar eprime-ignore-case 
+(defvar eprime-ignore-case t
   "Defines whether eprime-mode should ignore case. Defaults to true.
-  Set to \"nil\" if you want to turn this off."
-  t)
+  Set to \"nil\" if you want to turn this off.")
 
 (defvar eprime-banned-words
-  "The default banned words for eprime-mode, used by all of the functions in the mode."
   '("be" "being" "been" "am" "is" "isn't" "are" "aren't" "was" "wasn't" "were" "weren't"
     "I'm" "i'm" "you're" "we're" "they're" "he's" "she's" "it's" "there's" "here's"
-    "where's" "how's" "what's" "who's" "what's" "ain't" "hain't" "whatcha" "yer"))
+    "where's" "how's" "what's" "who's" "what's" "ain't" "hain't" "whatcha" "yer")
+  "The default banned words for eprime-mode, used by all of the functions in the mode.")
 
 ;;Note - FlySpell uses "OrangeRed" foreground
 (defface eprime-banned-words-face
