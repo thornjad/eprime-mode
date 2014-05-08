@@ -90,7 +90,8 @@
   "Checks the current buffer for banned words and applies a face
    to them."
   (interactive)
-  (let* ((orig-syntax (char-syntax ?')))
+  (let* ((orig-syntax (char-to-string (char-syntax ?'))))
+    (print orig-syntax)
     (modify-syntax-entry ?' "w")
     (unwind-protect
         (save-excursion
@@ -112,14 +113,14 @@
 (defun eprime-check-word ()
   "Checks the word that's currently entering."
   (interactive)
-  (modify-syntax-entry ?' "w")
+  (let* ((orig-syntax (char-to-string (char-syntax ?'))))
   (save-excursion
     (forward-word -1)
     (let ((current (thing-at-point 'word))
 	  (start-point-pos (point)))
       (forward-word 1)
       (eprime-check-thing current start-point-pos)))
-  (modify-syntax-entry ?' "."))
+  (modify-syntax-entry ?' orig-syntax)))
 
 (defun eprime-update (beg end length)
   "Scans around where the user types and informs if incorrect.
@@ -143,15 +144,13 @@
   "Initialises the mode."
   (eprime-check-buffer)
   (add-hook 'after-change-functions 'eprime-update)
-  ;;The below counts ' as part of a word, required for conjunctions
   (modify-syntax-entry ?' "w"))
 
-(defun eprime-cleanup ()
+(defun eprime-cleanup (old-syntax)
   "Cleans up after the mode."
   (eprime-remove-corrections)
   (remove-hook 'after-change-functions 'eprime-update)
-  ;;The below resets ' to its default.
-  (modify-syntax-entry ?' "."))
+  (modify-syntax-entry ?' old-syntax))
 
 ;;;###autoload
 (define-minor-mode eprime-mode
@@ -164,10 +163,11 @@
   :keymap nil
   :global nil
 
-  ;;the true = enabled, false = disabled
-  (if eprime-mode 
-      (eprime-init)
-    (eprime-cleanup)))
+  (let* ((orig-syntax (char-to-string (char-syntax ?'))))
+    ;;the true = enabled, false = disabled
+    (if eprime-mode 
+	(eprime-init)
+      (eprime-cleanup orig-syntax))))
 
 (provide 'eprime-mode)
 
