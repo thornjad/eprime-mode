@@ -6,7 +6,7 @@
 ;; Author: Andrew Hynes <andrewhynes@openmailbox.org>
 ;; URL: https://github.com/AndrewHynes/eprime-mode
 ;; Description: An E-prime checking mode for Emacs that highlights non-conforming text.
-;; Version: 1.0.1
+;; Version: 1.0.2
 ;; Keywords: E-prime, English, grammar
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -54,13 +54,16 @@
 
 (require 'cl)
 
-(modify-syntax-entry ?' "w")
-;;Counts ' as part of a word, required for conjunctions like I'm
+(defvar eprime-ignore-case 
+  "Defines whether eprime-mode should ignore case. Defaults to true.
+  Set to \"nil\" if you want to turn this off."
+  t)
 
-(setq eprime-ignore-case t)
-
-;;the banned words
-(setq eprime-banned-words '("be" "being" "been" "am" "is" "isn't" "are" "aren't" "was" "wasn't" "were" "weren't" "I'm" "i'm" "you're" "we're" "they're" "he's" "she's" "it's" "there's" "here's" "where's" "how's" "what's" "who's" "what's" "ain't" "hain't" "whatcha" "yer"))
+(defvar eprime-banned-words
+  "The default banned words for eprime-mode, used by all of the functions in the mode."
+  '("be" "being" "been" "am" "is" "isn't" "are" "aren't" "was" "wasn't" "were" "weren't"
+    "I'm" "i'm" "you're" "we're" "they're" "he's" "she's" "it's" "there's" "here's"
+    "where's" "how's" "what's" "who's" "what's" "ain't" "hain't" "whatcha" "yer"))
 
 ;;Note - FlySpell uses "OrangeRed" foreground
 (defface eprime-banned-words-face
@@ -87,6 +90,7 @@
   "Checks the current buffer for banned words and applies a face
    to them."
   (interactive)
+  (modify-syntax-entry ?' "w")
   (save-excursion
     (goto-char (point-min))
     (forward-word 1)
@@ -99,17 +103,20 @@
 	  (eprime-check-thing current start-point-pos))
 	(forward-word 1)
 	(when (eobp) (throw 'break "Finished!"))
-	(forward-word -1)))))
+	(forward-word -1))))
+  (modify-syntax-entry ?' "."))
 
 (defun eprime-check-word ()
   "Checks the word that's currently entering."
   (interactive)
+  (modify-syntax-entry ?' "w")
   (save-excursion
     (forward-word -1)
     (let ((current (thing-at-point 'word))
 	  (start-point-pos (point)))
       (forward-word 1)
-      (eprime-check-thing current start-point-pos))))
+      (eprime-check-thing current start-point-pos)))
+  (modify-syntax-entry ?' "."))
 
 (defun eprime-update (beg end length)
   "Scans around where the user types and informs if incorrect.
@@ -131,12 +138,16 @@
 (defun eprime-init ()
   "Initialises the mode."
   (eprime-check-buffer)
-  (add-hook 'after-change-functions 'eprime-update))
+  (add-hook 'after-change-functions 'eprime-update)
+  ;;The below counts ' as part of a word, required for conjunctions
+  (modify-syntax-entry ?' "w"))
 
 (defun eprime-cleanup ()
   "Cleans up after the mode."
   (eprime-remove-corrections)
-  (remove-hook 'after-change-functions 'eprime-update))
+  (remove-hook 'after-change-functions 'eprime-update)
+  ;;The below resets ' to its default.
+  (modify-syntax-entry ?' "."))
 
 (define-minor-mode eprime-mode
   "Minor mode for checking text conforms to E'. Change eprime-banned-words-face
