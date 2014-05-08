@@ -9,6 +9,8 @@
 ;; Version: 1.0.1
 ;; Keywords: E-prime, English, grammar
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation, either version 3 of the License, or
@@ -27,9 +29,10 @@
 ;;; Commentary:
 ;; 
 ;; * About eprime-mode
+;;
 ;; An E-prime checking mode for Emacs. 
-;; Read more here - https://en.wikipedia.org/wiki/E-prime
-;; Naturally, all of this file that can, conforms to E'
+;; Read more here - https://en.wikipedia.org/wiki/E-prime.
+;; Naturally, all of this file that can, conforms to E'.
 ;;
 ;; Adds the following functionality: 
 ;;
@@ -108,7 +111,6 @@
       (forward-word 1)
       (eprime-check-thing current start-point-pos))))
 
-
 (defun eprime-update (beg end length)
   "Scans around where the user types and informs if incorrect.
   Intended to invoke as the user types."
@@ -120,7 +122,6 @@
       (while (< (point) end)
 	(eprime-check-word)
 	(forward-word 1)))))
-
 
 (defun eprime-remove-corrections ()
   "Removes the overlayed corrections on words."
@@ -151,13 +152,6 @@
   (if eprime-mode 
       (eprime-init)
     (eprime-cleanup)))
-
-;;Testing area! -
-;;be being am is spaghetti
-;; is hello go to the are hello whatcha
-;; be toodlepip was going to the were I'm
-;; spaghetti and meatballs he's a penis
-;;AM BE BEING AM IS WHAT'S
 
 (provide 'eprime-mode)
 
