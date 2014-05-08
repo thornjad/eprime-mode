@@ -90,21 +90,23 @@
   "Checks the current buffer for banned words and applies a face
    to them."
   (interactive)
-  (modify-syntax-entry ?' "w")
-  (save-excursion
-    (goto-char (point-min))
-    (forward-word 1)
-    (forward-word -1)
-    (catch 'break
-      (while (not (eobp))
-	(let ((current (thing-at-point 'word))
-	      (start-point-pos (point)))
-	  (forward-word 1)
-	  (eprime-check-thing current start-point-pos))
-	(forward-word 1)
-	(when (eobp) (throw 'break "Finished!"))
-	(forward-word -1))))
-  (modify-syntax-entry ?' "."))
+  (let* ((orig-syntax (char-syntax ?')))
+    (modify-syntax-entry ?' "w")
+    (unwind-protect
+        (save-excursion
+          (goto-char (point-min))
+          (forward-word 1)
+          (forward-word -1)
+          (catch 'break
+            (while (not (eobp))
+              (let ((current (thing-at-point 'word))
+                    (start-point-pos (point)))
+                (forward-word 1)
+                (eprime-check-thing current start-point-pos))
+              (forward-word 1)
+              (when (eobp) (throw 'break "Finished!"))
+              (forward-word -1))))
+      (modify-syntax-entry ?' orig-syntax))))
 
 ;;;###autoload
 (defun eprime-check-word ()
