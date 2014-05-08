@@ -6,7 +6,7 @@
 ;; Author: Andrew Hynes <andrewhynes@openmailbox.org>
 ;; URL: https://github.com/AndrewHynes/eprime-mode
 ;; Description: An E-prime checking mode for Emacs that highlights non-conforming text.
-;; Version: 1.0
+;; Version: 1.0.1
 ;; Keywords: E-prime, English, grammar
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -49,8 +49,6 @@
 ;;   - Default different face than FlySpell for ease of use together
 ;; 
 
-
-;; Try not to hate me -
 (require 'cl)
 
 (modify-syntax-entry ?' "w")
