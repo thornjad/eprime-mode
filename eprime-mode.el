@@ -6,7 +6,7 @@
 ;; Author: Andrew Hynes <andrewhynes@openmailbox.org>
 ;; URL: https://github.com/AndrewHynes/eprime-mode
 ;; Description: An E-prime checking mode for Emacs that highlights non-conforming text.
-;; Version: 1.1.1
+;; Version: 1.1.2
 ;; Keywords: E-prime, English, grammar
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
