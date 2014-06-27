@@ -12,7 +12,7 @@ You can find eprime-mode on both Marmalade and MELPA.
 
 #### E-prime? What?...
 
-D. David Bourland, Jr., proposed an improvement to English called  E-prime (or E'), which doesn't allow forms of "to be", aiming to remedy some of its problems (for example E' avoids subjectivity and prefers objectivity). Since then, many scholars have picked up the idea and debated hotly over its usefulness (or lack thereof).
+D. David Bourland, Jr., proposed an improvement to English called  E-prime (or E'), which doesn't allow forms of "to be", aiming to remedy some of its problems (for example, E' avoids subjectivity and prefers objectivity). Since then, many scholars have picked up the idea and debated hotly over its usefulness (or lack thereof).
 
 Some argue it can clarify thoughts and strengthen writing, but I won't decide for you! Regardless of whether you think it could wind up resulting in something beneficial if everyone flipped to E' from English, I find it a fun game, if nothing else.
 
