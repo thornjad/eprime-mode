@@ -71,17 +71,17 @@
   "Checks something returned by thing-at-point and corrects it if necessary.
   Whilst the variable eprime-ignore-case remains t, it will ignore case, else it won't.
   The default has the property of t."
-  ;;can do it in less lines, but this way feels clearer to me
-  (let ((end (point)))
-    (if eprime-ignore-case
-	(if (member (downcase thing) eprime-banned-words)
-	    (let ((new-ov (make-overlay start end)))
-	      (overlay-put new-ov 'face 'eprime-banned-words-face))
-	  (remove-overlays start end))
-      (if (member thing eprime-banned-words)
-	  (let ((new-ov (make-overlay start end)))
-	    (overlay-put new-ov 'face 'eprime-banned-words-face))
-	(remove-overlays start end)))))
+  (when thing
+    (let ((end (point)))
+      (if eprime-ignore-case
+	        (if (member (downcase thing) eprime-banned-words)
+	            (let ((new-ov (make-overlay start end)))
+	              (overlay-put new-ov 'face 'eprime-banned-words-face))
+	          (remove-overlays start end))
+        (if (member thing eprime-banned-words)
+	          (let ((new-ov (make-overlay start end)))
+	            (overlay-put new-ov 'face 'eprime-banned-words-face))
+	        (remove-overlays start end))))))
 
 ;;;###autoload
 (defun eprime-check-buffer ()
