@@ -1,20 +1,17 @@
 ;;; eprime-mode.el --- An E-prime checking mode for Emacs
 
+;; Copyright (C) 2020-2021 Jade Michael Thornton
 ;; Copyright (C) 2014 Andrew Hynes
 
 ;; Filename: eprime-mode.el
-;; Author: Andrew Hynes <andrewhynes@openmailbox.org>
-;; URL: https://github.com/AndrewHynes/eprime-mode
+;; URL: https://gitlab.com/thornjad/eprime-mode
 ;; Description: An E-prime checking mode for Emacs that highlights non-conforming text.
-;; Version: 1.1.2
+;; Version: 1.1.3
 ;; Keywords: E-prime, English, grammar
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or
-;; (at your option) any later version.
+;; the Free Software Foundation, version 3.
 
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -24,10 +21,8 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
 ;;; Commentary:
-;; 
+
 ;; * About eprime-mode
 ;;
 ;; An E-prime checking mode for Emacs. 
@@ -50,7 +45,8 @@
 ;;   - Can customise banned words (by pushing onto eprime-baned-words)
 ;;
 ;;   - Default different face than FlySpell for ease of use together
-;; 
+
+;;; Code:
 
 (require 'cl)
 
@@ -67,9 +63,8 @@
 ;;Note - FlySpell uses "OrangeRed" foreground
 (defface eprime-banned-words-face
   '((((class color)) (:foreground "firebrick2" :weight bold :underline t))
-      (t (:weight bold)))
-  "Face used for marking a word banned by E-prime. For reference, FlySpell uses
-  OrangeRed as its forground. The foreground for E' mode currently has the value \"firebrick2\"."
+    (t (:weight bold)))
+  "Face used for marking a word banned by E-prime."
   :group 'eprime)
 
 (defun eprime-check-thing (thing start)
@@ -116,13 +111,13 @@
   "Checks the word that's currently entering."
   (interactive)
   (let* ((orig-syntax (char-to-string (char-syntax ?'))))
-  (save-excursion
-    (forward-word -1)
-    (let ((current (thing-at-point 'word))
-	  (start-point-pos (point)))
-      (forward-word 1)
-      (eprime-check-thing current start-point-pos)))
-  (modify-syntax-entry ?' orig-syntax)))
+    (save-excursion
+      (forward-word -1)
+      (let ((current (thing-at-point 'word))
+	          (start-point-pos (point)))
+        (forward-word 1)
+        (eprime-check-thing current start-point-pos)))
+    (modify-syntax-entry ?' orig-syntax)))
 
 (defun eprime-update (beg end length)
   "Scans around where the user types and informs if incorrect.
@@ -131,10 +126,10 @@
       (eprime-check-word)
     (save-excursion
       (while (> (point) beg)
-	(forward-word -1))
+	      (forward-word -1))
       (while (< (point) end)
-	(eprime-check-word)
-	(forward-word 1)))))
+	      (eprime-check-word)
+	      (forward-word 1)))))
 
 ;;;###autoload
 (defun eprime-remove-corrections ()
@@ -168,7 +163,7 @@
   (let* ((orig-syntax (char-to-string (char-syntax ?'))))
     ;;the true = enabled, false = disabled
     (if eprime-mode 
-	(eprime-init)
+	      (eprime-init)
       (eprime-cleanup orig-syntax))))
 
 (provide 'eprime-mode)
