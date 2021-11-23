@@ -1,4 +1,4 @@
-;;; eprime-mode.el --- An E-prime checking mode for Emacs
+;;; eprime-mode.el --- An E′ checking mode for Emacs
 
 ;; Copyright (C) 2020-2021 Jade Michael Thornton
 ;; Copyright (C) 2014 Andrew Hynes
@@ -6,12 +6,12 @@
 ;; Filename: eprime-mode.el
 ;; URL: https://gitlab.com/thornjad/eprime-mode
 ;; Description: An E-prime checking mode for Emacs that highlights non-conforming text.
-;; Version: 1.1.3
+;; Version: 1.2.0
 ;; Keywords: E-prime, English, grammar
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, version 3.
+;; the Free Software Foundation, version 3 only.
 
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,28 +23,34 @@
 
 ;;; Commentary:
 
-;; * About eprime-mode
+;; A minor mode for Emacs informing users of words not conforming to E′, as you type or on demand.
+
+;; Installation:
 ;;
-;; An E-prime checking mode for Emacs. 
-;; Read more here - https://en.wikipedia.org/wiki/E-prime.
-;; Naturally, all of this file that can, conforms to E'.
+;; Install manually, or using a library like `straight.el':
 ;;
-;; Adds the following functionality: 
+;;    (use-package eprime-mode
+;;     :straight (:host gitlab :repo "thornjad/eprime-mode" :branch "main")
+;;     :hook ((text-mode) . eprime-mode))
+
+;; E prime? What?:
 ;;
-;;   - M-x eprime-check-buffer to check the buffer
-;; 
-;;   - A minor mode, eprime-mode, which checks the buffer and
-;;     any text you enter thereafter.
-;; 
-;;   - M-x eprime-remove corrections to remove its corrections
-;; 
-;;   - Customisable face for banned words. eprime-banned-words-face
-;; 
-;;   - M-x eprime-check-word to check only the current word
+;; E′ (or E-prime) refers to a subset of the English language excluding all forms of the verb "to
+;; be". Such a practice may strengthen writing skills and may provide a path for greater mindfulness
+;; in writing. Only shaky evidence really exists, but it can provide some fun and challenge.
 ;;
-;;   - Can customise banned words (by pushing onto eprime-baned-words)
+;; Check out the [the Wikipedia page](https://en.wikipedia.org/wiki/E-Prime) to learn more.
+
+;; License:
 ;;
-;;   - Default different face than FlySpell for ease of use together
+;; Copyright (C) 2020-2021 Jade Michael Thornton\
+;; Copyright (C) 2014 Andrew Hynes
+;;
+;; This program is free software; you may redistribute it and/or modify it under the terms of the
+;; GNU General Public License version 3 only, as published by the Free Software Foundation. This
+;; program carries no warranty whatsoever, without even the implied warranty of merchantability or
+;; fitness for a particular purpose. See <https://www.gnu.org/licenses/> for more details.
+
 
 ;;; Code:
 
