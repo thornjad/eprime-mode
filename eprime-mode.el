@@ -155,7 +155,7 @@
   to change what banned words look like, and use (setq eprime-ignore-case nil) if you
   do not want it to match upper case words.
   (eprime-check-buffer), when invoked, can check a buffer without turning the mode on."
-  :lighter " [E' Mode]"
+  :lighter " [E']"
   :init-value nil
   :keymap nil
   :global nil
