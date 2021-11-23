@@ -126,8 +126,8 @@
   (if (<= length 1)
       (eprime-check-word)
     (save-excursion
-      (while (> (point) beg)
-	      (forward-word -1))
+      (setf (point) beg)
+      (forward-word -1)
       (while (< (point) end)
 	      (eprime-check-word)
 	      (forward-word 1)))))
