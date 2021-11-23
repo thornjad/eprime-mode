@@ -68,20 +68,18 @@
   :group 'eprime)
 
 (defun eprime-check-thing (thing start)
-  "Checks something returned by thing-at-point and corrects it if necessary.
-  Whilst the variable eprime-ignore-case remains t, it will ignore case, else it won't.
-  The default has the property of t."
+  "Checks something returned by thing-at-point and corrects it if necessary."
   (when thing
     (let ((end (point)))
       (if eprime-ignore-case
-	        (if (member (downcase thing) eprime-banned-words)
-	            (let ((new-ov (make-overlay start end)))
-	              (overlay-put new-ov 'face 'eprime-banned-words-face))
-	          (remove-overlays start end))
-        (if (member thing eprime-banned-words)
+	        (when (member (downcase thing) eprime-banned-words)
 	          (let ((new-ov (make-overlay start end)))
-	            (overlay-put new-ov 'face 'eprime-banned-words-face))
-	        (remove-overlays start end))))))
+	            (overlay-put new-ov 'face 'eprime-banned-words-face)))
+
+        ;; if not eprime-ignore-case
+        (when (member thing eprime-banned-words)
+	        (let ((new-ov (make-overlay start end)))
+	          (overlay-put new-ov 'face 'eprime-banned-words-face)))))))
 
 ;;;###autoload
 (defun eprime-check-buffer ()
