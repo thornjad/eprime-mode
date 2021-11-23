@@ -106,6 +106,7 @@
               (forward-word -1))))
       (modify-syntax-entry ?' orig-syntax))))
 
+;; TODO useless if mode not active?
 ;;;###autoload
 (defun eprime-check-word ()
   "Checks the word that's currently entering."
